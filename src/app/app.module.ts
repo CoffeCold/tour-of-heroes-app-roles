@@ -1,21 +1,22 @@
-import { NgModule }       from '@angular/core';
-import { BrowserModule }  from '@angular/platform-browser';
-import { FormsModule }    from '@angular/forms';
-import { HttpClientModule }    from '@angular/common/http';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './_services/in-memory-data.service';
+import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
+import { InMemoryDataService } from "./_services/in-memory-data.service";
 
-import { AppRoutingModule }     from './app-routing.module';
+import { AppRoutingModule } from "./app-routing.module";
 
-import { AppComponent }         from './app.component';
-import { DashboardComponent }   from './dashboard/dashboard.component';
-import { HeroDetailComponent }  from './hero-detail/hero-detail.component';
-import { HeroesComponent }      from './heroes/heroes.component';
-import { HeroSearchComponent }  from './hero-search/hero-search.component';
-import { MessagesComponent }    from './messages/messages.component';
-import { AuthenticationService } from './_services/authentication.service';
-import { UserService } from './_services/user.service';
+import { AppComponent } from "./app.component";
+import { DashboardComponent } from "./dashboard/dashboard.component";
+import { HeroDetailComponent } from "./hero-detail/hero-detail.component";
+import { HeroesComponent } from "./heroes/heroes.component";
+import { HeroSearchComponent } from "./hero-search/hero-search.component";
+import { MessagesComponent } from "./messages/messages.component";
+import { LoginComponent } from "./login/login.component";
+import { AuthenticationService } from "./_services/authentication.service";
+import { UserService } from "./_services/user.service";
 
 @NgModule({
   imports: [
@@ -23,13 +24,13 @@ import { UserService } from './_services/user.service';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-
+    ReactiveFormsModule,
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
+      dataEncapsulation: false
+    })
   ],
   declarations: [
     AppComponent,
@@ -37,13 +38,13 @@ import { UserService } from './_services/user.service';
     HeroesComponent,
     HeroDetailComponent,
     MessagesComponent,
-    HeroSearchComponent
+    HeroSearchComponent,
+    LoginComponent
   ],
-  bootstrap: [ AppComponent ],
+  bootstrap: [AppComponent],
   providers: [AuthenticationService, UserService]
 })
-export class AppModule { }
-
+export class AppModule {}
 
 /*
 Copyright 2017-2018 Google Inc. All Rights Reserved.

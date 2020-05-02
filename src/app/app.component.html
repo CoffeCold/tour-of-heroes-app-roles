@@ -2,7 +2,7 @@
 <nav>
 	<a routerLink="/dashboard" *ngIf="isReader">Dashboard</a>
 	<a routerLink="/heroes"*ngIf="isReader">Heroes</a>
-	<a class="nav-item nav-link" (click)="logout()" *ngIf="isReader">Logout</a>
+	<a class="nav-item nav-link" (click)="logout()" *ngIf="isLoggedIn">Logout</a>
 </nav>
 <router-outlet></router-outlet>
 <app-messages></app-messages>

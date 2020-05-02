@@ -35,6 +35,8 @@ export class AppComponent {
       this.currentUser.roles.find(x => x.roletype === RoleType.HeroesReader)
     );
   }
+  
+  
 
   logout() {
     this.authenticationService.logout();

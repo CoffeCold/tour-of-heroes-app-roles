@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
 import { InMemoryDataService } from "./_services/in-memory-data.service";
@@ -17,6 +17,9 @@ import { MessagesComponent } from "./messages/messages.component";
 import { LoginComponent } from "./login/login.component";
 import { AuthenticationService } from "./_services/authentication.service";
 import { UserService } from "./_services/user.service";
+import { fakeBackendProvider } from "./_helpers/fake-backend";
+import { ErrorInterceptor } from "./_helpers/error.interceptor";
+import { JwtInterceptor } from "./_helpers/jwt.interceptor";
 
 @NgModule({
   imports: [
@@ -42,7 +45,15 @@ import { UserService } from "./_services/user.service";
     LoginComponent
   ],
   bootstrap: [AppComponent],
-  providers: [AuthenticationService, UserService]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    // provider used to create fake backend
+    fakeBackendProvider,
+    AuthenticationService,
+    UserService
+  ]
 })
 export class AppModule {}
 

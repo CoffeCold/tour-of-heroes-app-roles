@@ -20,7 +20,7 @@ import { UserService } from "./_services/user.service";
 import { fakeBackendProvider } from "./_helpers/fake-backend";
 import { ErrorInterceptor } from "./_helpers/error.interceptor";
 import { JwtInterceptor } from "./_helpers/jwt.interceptor";
-import { HeroDetailroComponent } from './hero-detailro/hero-detailro.component';
+import { HeroDetailRoComponent } from './hero-detailro/hero-detailro.component';
 
 @NgModule({
   imports: [
@@ -44,7 +44,7 @@ import { HeroDetailroComponent } from './hero-detailro/hero-detailro.component';
     MessagesComponent,
     HeroSearchComponent,
     LoginComponent,
-    HeroDetailroComponent
+    HeroDetailRoComponent
   ],
   bootstrap: [AppComponent],
   providers: [

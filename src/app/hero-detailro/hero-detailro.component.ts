@@ -10,7 +10,7 @@ import { HeroService }  from '../_services/hero.service';
   templateUrl: './hero-detailro.component.html',
   styleUrls: [ './hero-detailro.component.css' ]
 })
-export class HerodetailroComponent implements OnInit {
+export class HeroDetailRoComponent implements OnInit {
   @Input() hero: Hero;
 
   constructor(
@@ -33,5 +33,15 @@ export class HerodetailroComponent implements OnInit {
     this.location.back();
   }
 
- 
+ save(): void {
+    this.heroService.updateHero(this.hero)
+      .subscribe(() => this.goBack());
+  }
 }
+
+
+/*
+Copyright 2017-2018 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+*/

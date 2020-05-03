@@ -4,6 +4,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { HeroesComponent } from "./heroes/heroes.component";
 import { HeroDetailComponent } from "./hero-detail/hero-detail.component";
+import { HeroDetailRoComponent } from "./hero-detail/hero-detailro.component";
 import { LoginComponent } from "./login/login.component";
 import { AuthGuard } from "./_helpers/auth.guard";
 import { RoleType } from "./_models/role";
@@ -23,6 +24,12 @@ const routes: Routes = [
   {
     path: "detail/:id",
     component: HeroDetailComponent,
+    canActivate: [AuthGuard],
+    data: { role: [RoleType.HeroesWriter] }
+  },
+  {
+    path: "HeroDetailroComponent/:id",
+    component: HeroDetailroComponent,
     canActivate: [AuthGuard],
     data: { role: [RoleType.HeroesWriter] }
   },

@@ -20,6 +20,7 @@ import { UserService } from "./_services/user.service";
 import { fakeBackendProvider } from "./_helpers/fake-backend";
 import { ErrorInterceptor } from "./_helpers/error.interceptor";
 import { JwtInterceptor } from "./_helpers/jwt.interceptor";
+import { HeroDetailroComponent } from './hero-detailro/hero-detailro.component';
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import { JwtInterceptor } from "./_helpers/jwt.interceptor";
     HeroDetailComponent,
     MessagesComponent,
     HeroSearchComponent,
-    LoginComponent
+    LoginComponent,
+    HeroDetailroComponent
   ],
   bootstrap: [AppComponent],
   providers: [

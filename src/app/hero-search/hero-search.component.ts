@@ -1,28 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject } from "rxjs";
+import { User } from "../_models/user";
+import { Role, RoleType } from "../_models/role";
+import { AuthenticationService } from "../_services/authentication.service";
+import { debounceTime, distinctUntilChanged, switchMap } from "rxjs/operators";
 
-import {
-   debounceTime, distinctUntilChanged, switchMap
- } from 'rxjs/operators';
-
-import { Hero } from '../_models/hero';
-import { HeroService } from '../_services/hero.service';
+import { Hero } from "../_models/hero";
+import { HeroService } from "../_services/hero.service";
 
 @Component({
-  selector: 'app-hero-search',
-  templateUrl: './hero-search.component.html',
-  styleUrls: [ './hero-search.component.css' ]
+  selector: "app-hero-search",
+  templateUrl: "./hero-search.component.html",
+  styleUrls: ["./hero-search.component.css"]
 })
 export class HeroSearchComponent implements OnInit {
   heroes$: Observable<Hero[]>;
   private searchTerms = new Subject<string>();
+  currentUser: User;
 
-  constructor(private heroService: HeroService) {}
+  constructor(
+    private heroService: HeroService,
+    private authenticationService: AuthenticationService
+  ) {
+    this.authenticationService.currentUser.subscribe(
+      x => (this.currentUser = x)
+    );
+  }
 
   // Push a search term into the observable stream.
   search(term: string): void {
     this.searchTerms.next(term);
+  }
+
+  get isWriter() {
+    return (
+      this.currentUser &&
+      this.currentUser.roles.find(x => x.roletype === RoleType.HeroesWriter)
+    );
   }
 
   ngOnInit(): void {
@@ -34,11 +49,10 @@ export class HeroSearchComponent implements OnInit {
       distinctUntilChanged(),
 
       // switch to new search observable each time the term changes
-      switchMap((term: string) => this.heroService.searchHeroes(term)),
+      switchMap((term: string) => this.heroService.searchHeroes(term))
     );
   }
 }
-
 
 /*
 Copyright 2017-2018 Google Inc. All Rights Reserved.

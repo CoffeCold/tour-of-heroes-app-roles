@@ -9,18 +9,22 @@
 	</ng-container>
 
 	<ng-template #writeTemplate>
-		<a *ngFor="let hero of heroes" class="col-1-4" routerLink="/detail/{{hero.id}}">
-			<div class="module hero">
-				<h4>{{hero.name}}</h4>
-			</div>
-		</a>
+     <ul class="search-result">
+    <li *ngFor="let hero of heroes$ | async" >
+      <a routerLink="/detail/{{hero.id}}">
+        {{hero.name}}
+      </a>
+    </li>
+  </ul>
 	</ng-template>
 	<ng-template #readTemplate>
-		<a *ngFor="let hero of heroes" class="col-1-4" routerLink="/detailro/{{hero.id}}">
-			<div class="module hero">
-				<h4>{{hero.name}}</h4>
-			</div>
-		</a>
+     <ul class="search-result">
+    <li *ngFor="let hero of heroes$ | async" >
+      <a routerLink="/detailro/{{hero.id}}">
+        {{hero.name}}
+      </a>
+    </li>
+  </ul>
 	</ng-template>
 
   </ul>

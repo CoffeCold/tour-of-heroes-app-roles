@@ -23,7 +23,6 @@ export class AppComponent {
     );
   }
 
- 
   get isLoggedIn() {
     return (
       this.currentUser 
@@ -36,8 +35,6 @@ export class AppComponent {
     );
   }
   
-  
-
   logout() {
     this.authenticationService.logout();
     this.router.navigate(["/login"]);
